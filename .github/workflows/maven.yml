@@ -11,9 +11,7 @@ on:
 
 jobs:
   build:
-
     runs-on: ubuntu-latest
-
     steps:
     - uses: actions/checkout@v2
     - name: Set up JDK 11
@@ -22,4 +20,8 @@ jobs:
         java-version: '11'
         distribution: 'adopt'
     - name: Build with Maven
-      run: mvn -B package --file pom.xml
+      run : apt-get install wget openjdk-8-jdk-headless -y
+      run : wget -q0- https://cli-assets.heroku.com/install-ubuntu.sh | sh
+      run : heroku plugins:install heroku-cli-deploy
+      run : heroku deploy:jar target/*.jar --app $HEROKU_APP_NAME
+      #run: mvn -B package --file pom.xml
