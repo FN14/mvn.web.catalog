@@ -13,11 +13,11 @@ jobs:
     steps:
     - name: Check out repository
       uses: actions/checkout@v2
-    - name: Deploy to Heroku
+    - name: Heroku login
       env: 
         HEROKU_API_KEY: ${{ secrets.HEROKU_API_KEY }}
       run: heroku container:login 
     - name: Build and push
       env:
         HEROKU_API_KEY: ${{ secrets.HEROKU_API_KEY }}
-      run: heroku container:push -a ${{ secrets.HEROKU_APP_NAME }}  web
+      run: git push heroku main
