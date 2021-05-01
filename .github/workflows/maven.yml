@@ -24,12 +24,9 @@ jobs:
       
     - name: Install Plugin 
       run: heroku plugins:install heroku-cli-deploy
-    
-    - name: Heroku Buildpack
-      run: heroku buildpacks:clear
-      
+          
     - name: Heroku deploy
       env:
         HEROKU_API_KEY: ${{ secrets.HEROKU_API_KEY }}
-      run: heroku deploy:jar target/*.jar --app ${{ secrets.HEROKU_APP_NAME }}
+      run: heroku deploy:jar target/*.jar buildpacks:clear --app ${{ secrets.HEROKU_APP_NAME }}
       
