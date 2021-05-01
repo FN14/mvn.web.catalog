@@ -8,28 +8,28 @@ on:
     branches: [ main ]
 
 jobs:
-  build-and-deploy :
-    runs-on: ubuntu-latest
-    steps:
-    - name: Check out repository
-      uses: actions/checkout@v2
+    build-and-deploy :
+        runs-on: ubuntu-latest
+        steps:
+        -   name: Check out repository
+            uses: actions/checkout@v2
       
-    - name: build maven
-      run: mvn clean package -DskipTests=true
+        -   name: build maven
+            run: mvn clean package -DskipTests=true
       
-    - name: Deploy and Login Heroku
-      env: 
-        HEROKU_API_KEY: ${{ secrets.HEROKU_API_KEY }}
-      run: heroku container:login 
+        -   name: Deploy and Login Heroku
+            env: 
+                HEROKU_API_KEY: ${{ secrets.HEROKU_API_KEY }}
+            run: heroku container:login 
       
-    - name: Install Plugin 
-      run: heroku plugins:install heroku-cli-deploy
+        -   name: Install Plugin 
+            run: heroku plugins:install heroku-cli-deploy
     
-    - name: Heroku Buildpack
-      run: heroku buildpacks:set heroku/jvm --app ${{ secrets.HEROKU_APP_NAME }}
+        -   name: Heroku Buildpack
+            run: heroku buildpacks:set heroku/jvm --app ${{ secrets.HEROKU_APP_NAME }}
       
-    - name: Heroku deploy
-      env:
-        HEROKU_API_KEY: ${{ secrets.HEROKU_API_KEY }}
-      run: heroku deploy:jar target/*.jar --app ${{ secrets.HEROKU_APP_NAME }}
+        -   name: Heroku deploy
+            env:
+                HEROKU_API_KEY: ${{ secrets.HEROKU_API_KEY }}
+            run: heroku deploy:jar target/*.jar --app ${{ secrets.HEROKU_APP_NAME }}
       
