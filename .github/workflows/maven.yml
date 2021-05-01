@@ -26,7 +26,7 @@ jobs:
       run: heroku plugins:install heroku-cli-deploy
     
     - name: Heroku Buildpack
-      run: heroku buildpacks:set heroku/jvm
+      run: heroku buildpacks:set heroku/jvm --app ${{ secrets.HEROKU_APP_NAME }}
       
     - name: Heroku deploy
       env:
