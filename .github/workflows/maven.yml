@@ -17,6 +17,10 @@ jobs:
       env: 
         HEROKU_API_KEY: ${{ secrets.HEROKU_API_KEY }}
       run: heroku container:login 
+    - name: Add Heroku remote
+      run: heroku git:remote --app ${{ secrets.HEROKU_APP_NAME }}
+      env:
+          HEROKU_APP_NAME: ${{ secrets.HEROKU_APP_NAME }}
     - name: Build and push
       env:
         HEROKU_API_KEY: ${{ secrets.HEROKU_API_KEY }}
