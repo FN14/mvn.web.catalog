@@ -5,6 +5,7 @@
  */
 package fn14.mvn.web.catalog.Entity;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
@@ -21,11 +22,14 @@ import org.hibernate.annotations.GenericGenerator;
 public class Product {
     @Id @GeneratedValue(generator = "uuid")
     @GenericGenerator(name = "uuid", strategy = "uuid2")
-    private String product_id;
+    @Column(name="product_id")
+    private String productId;
     
     @NotNull @NotEmpty
-    private String product_code;
+    @Column(name="product_code")
+    private String productCode;
     
     @NotNull @NotEmpty
-    private String product_name;
+    @Column(name="product_name")
+    private String productName; 
 }

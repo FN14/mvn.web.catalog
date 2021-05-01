@@ -12,6 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -23,9 +24,17 @@ import org.springframework.web.bind.annotation.RestController;
 public class ProductApiController {
     @Autowired private ProductDao productDao;
     
-    @GetMapping
+    @GetMapping("/")
     public Page<Product> findProducts(Pageable page){
         return productDao.findAll(page);
     }
+    
+    
+    
+    @GetMapping("/{id}")
+    public Product findById(@PathVariable("id") Product p){
+        return p;
+    }
+    
     
 }
