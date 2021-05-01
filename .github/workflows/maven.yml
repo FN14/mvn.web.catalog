@@ -18,8 +18,9 @@ jobs:
         java-version: '11'
         distribution: 'adopt'
     - name: Build with Maven
-      run : apt-get install wget openjdk-8-jdk-headless -y
-      run : wget -q0- https://cli-assets.heroku.com/install-ubuntu.sh | sh
-      run : heroku plugins:install heroku-cli-deploy
-      run : heroku deploy:jar target/*.jar --app $HEROKU_APP_NAME
+      script : 
+      - apt-get install wget openjdk-8-jdk-headless -y
+      - wget -q0- https://cli-assets.heroku.com/install-ubuntu.sh | sh
+      - heroku plugins:install heroku-cli-deploy
+      - heroku deploy:jar target/*.jar --app $HEROKU_APP_NAME
       #run: mvn -B package --file pom.xml
