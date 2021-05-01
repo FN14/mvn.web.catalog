@@ -12,14 +12,6 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v2
-    - name: login
-      uses: actions/heroku@master
-      env:
-          HEROKU_API_KEY : ${{secrets.HEROKU_API_KEY}}
-      with:
-        args: container:login
-    - name: push
-      uses: action/heroku@master
       env :
            HEROKU_API_KEY : ${{secrets.HEROKU_API_KEY}}
       with :
