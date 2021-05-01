@@ -8,17 +8,25 @@ on:
     branches: [ main ]
 
 jobs:
-  build:
+  build-and-deploy :
     runs-on: ubuntu-latest
     steps:
     - name: Check out repository
       uses: actions/checkout@v2
-    - name: Heroku login
+      
+    - name: build maven
+      run: mvn clean package --DskipTests
+      with :
+        image: maven:3-jdk-8
+      
+    - name: Deploy and Login Heroku
       env: 
         HEROKU_API_KEY: ${{ secrets.HEROKU_API_KEY }}
       run: heroku container:login 
+      
     - name: Install Plugin 
       run: heroku plugins:install heroku-cli-deploy
+      
     - name: Heroku deploy
       env:
         HEROKU_API_KEY: ${{ secrets.HEROKU_API_KEY }}
