@@ -16,8 +16,6 @@ jobs:
       
     - name: build maven
       run: mvn clean package --DskipTests
-      with :
-        image: maven:3-jdk-8
       
     - name: Deploy and Login Heroku
       env: 
